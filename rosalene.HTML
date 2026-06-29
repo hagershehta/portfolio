@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROSALENE — Luxury Hair Care & Cosmetics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────────────── */
+    :root {
+      --black:    #080808;
+      --ink:      #111111;
+      --charcoal: #2a2a2a;
+      --stone:    #666666;
+      --mist:     #aaaaaa;
+      --silver:   #d4d4d4;
+      --cloud:    #efefef;
+      --white:    #f8f8f8;
+      --pure:     #ffffff;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --font-mono:    'DM Mono', monospace;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+    input, select, textarea { font-family: inherit; }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--charcoal); }
+
+    /* ─────────────────────────────────────────────────
+       ANNOUNCEMENT BAR
+    ───────────────────────────────────────────────── */
+    .announcement {
+      background: var(--charcoal);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+
+    /* ─────────────────────────────────────────────────
+       HEADER / NAV
+    ───────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(8,8,8,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--charcoal);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left { display: flex; gap: 2.5rem; }
+
+    .nav-left a {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone);
+      transition: color 0.3s;
+    }
+
+    .nav-left a:hover { color: var(--white); }
+
+    .brand-wordmark {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      color: var(--white);
+      white-space: nowrap;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-icon {
+      background: none;
+      border: none;
+      color: var(--stone);
+      cursor: pointer;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.3s;
+    }
+
+    .nav-icon:hover { color: var(--white); }
+
+    .cart-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cart-count {
+      background: var(--white);
+      color: var(--black);
+      border-radius: 50%;
+      width: 18px; height: 18px;
+      font-size: 0.58rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      transition: transform 0.3s var(--ease-out);
+    }
+
+    .cart-count.bump { animation: bump 0.35s var(--ease-out); }
+    @keyframes bump { 0%,100% { transform: scale(1); } 50% { transform: scale(1.4); } }
+
+    /* ─────────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────────── */
+    #hero {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 3rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 70% 50%, rgba(255,255,255,0.025) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255,255,255,0.02) 0%, transparent 60%);
+    }
+
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; width: 100%; }
+
+    .hero-super {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--stone);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-super::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--stone);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 12vw, 11rem);
+      font-weight: 300;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .hero-headline .italic { font-style: italic; color: var(--mist); }
+
+    .hero-headline .outlined {
+      -webkit-text-stroke: 1px var(--charcoal);
+      color: transparent;
+    }
+
+    .hero-sub-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 4rem;
+    }
+
+    .hero-descriptor {
+      max-width: 320px;
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--stone);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid var(--white);
+      padding: 1rem 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn-primary:hover { background: transparent; color: var(--white); }
+
+    .btn-outline {
+      border: 1px solid var(--charcoal);
+      color: var(--mist);
+      padding: 1rem 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .btn-outline:hover { border-color: var(--silver); color: var(--white); }
+
+    /* floating label */
+    .hero-float-label {
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      transform-origin: center;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      white-space: nowrap;
+    }
+
+    /* ─────────────────────────────────────────────────
+       MARQUEE
+    ───────────────────────────────────────────────── */
+    .marquee-strip {
+      border-top: 1px solid var(--charcoal);
+      border-bottom: 1px solid var(--charcoal);
+      overflow: hidden;
+      padding: 1rem 0;
+      background: var(--ink);
+    }
+
+    .marquee-inner {
+      display: flex;
+      gap: 3rem;
+      animation: marqueeScroll 22s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-inner span {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--charcoal);
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+    }
+
+    .marquee-inner .sep {
+      font-style: normal;
+      color: var(--charcoal);
+    }
+
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─────────────────────────────────────────────────
+       PRODUCTS
+    ───────────────────────────────────────────────── */
+    #products {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 7rem 3rem;
+    }
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--charcoal);
+    }
+
+    .filter-tab {
+      padding: 0.6rem 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone);
+      border: none;
+      background: transparent;
+      border-right: 1px solid var(--charcoal);
+      transition: background 0.25s, color 0.25s;
+      cursor: pointer;
+    }
+
+    .filter-tab:last-child { border-right: none; }
+    .filter-tab.active, .filter-tab:hover { background: var(--white); color: var(--black); }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--charcoal);
+      border: 1px solid var(--charcoal);
+    }
+
+    .product-card {
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .product-image-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    /* Elegant abstract product imagery using CSS */
+    .product-visual {
+      width: 100%; height: 100%;
+      position: relative;
+      transition: transform 0.7s var(--ease-out);
+    }
+
+    .product-card:hover .product-visual { transform: scale(1.04); }
+
+    /* Each product has a unique abstract visual */
+    .pv-1 {
+      background: linear-gradient(145deg, #1a1a1a 0%, #2e2e2e 50%, #1a1a1a 100%);
+    }
+    .pv-1::before {
+      content: '';
+      position: absolute;
+      width: 70%; height: 70%;
+      top: 15%; left: 15%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .pv-1::after {
+      content: '';
+      position: absolute;
+      width: 40%; height: 40%;
+      top: 30%; left: 30%;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .pv-2 {
+      background: linear-gradient(200deg, #151515 0%, #222222 60%, #111111 100%);
+    }
+    .pv-2::before {
+      content: '';
+      position: absolute;
+      width: 1px; height: 60%;
+      top: 20%; left: 50%;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.12), transparent);
+    }
+    .pv-2::after {
+      content: '';
+      position: absolute;
+      inset: 20%;
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 2px;
+    }
+
+    .pv-3 {
+      background: linear-gradient(160deg, #0f0f0f 0%, #1e1e1e 70%, #0f0f0f 100%);
+    }
+    .pv-3::before {
+      content: '';
+      position: absolute;
+      width: 50%; height: 80%;
+      top: 10%; left: 25%;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 60px;
+    }
+
+    .pv-4 {
+      background: linear-gradient(120deg, #181818 0%, #2c2c2c 50%, #181818 100%);
+    }
+    .pv-4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 70%);
+    }
+
+    .pv-5 { background: linear-gradient(145deg, #161616 0%, #252525 55%, #161616 100%); }
+    .pv-5::before {
+      content: '';
+      position: absolute;
+      width: 60%; height: 1px;
+      top: 50%; left: 20%;
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 20px 0 rgba(255,255,255,0.04), 0 -20px 0 rgba(255,255,255,0.04);
+    }
+
+    .pv-6 { background: linear-gradient(200deg, #131313 0%, #202020 60%, #131313 100%); }
+    .pv-6::before {
+      content: '';
+      position: absolute;
+      width: 40%; height: 40%;
+      top: 30%; left: 30%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      transform: rotate(45deg);
+    }
+
+    .pv-7 { background: linear-gradient(160deg, #0e0e0e 0%, #1c1c1c 65%, #0e0e0e 100%); }
+    .pv-7::before {
+      content: '';
+      position: absolute;
+      inset: 15%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: inset 0 0 40px rgba(255,255,255,0.02);
+    }
+
+    .pv-8 { background: linear-gradient(120deg, #171717 0%, #2b2b2b 50%, #171717 100%); }
+    .pv-8::before {
+      content: '';
+      position: absolute;
+      width: 2px; height: 50%;
+      top: 25%; left: 40%;
+      background: rgba(255,255,255,0.08);
+    }
+    .pv-8::after {
+      content: '';
+      position: absolute;
+      width: 2px; height: 50%;
+      top: 25%; left: 60%;
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* Hover overlay */
+    .product-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(8,8,8,0.88);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.4s var(--ease-out);
+      backdrop-filter: blur(2px);
+    }
+
+    .product-card:hover .product-overlay { opacity: 1; }
+
+    .overlay-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 300;
+      text-align: center;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .overlay-price {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--mist);
+    }
+
+    .btn-atc {
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid var(--white);
+      padding: 0.75rem 1.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+      margin-top: 0.25rem;
+    }
+
+    .btn-atc:hover { background: transparent; color: var(--white); }
+
+    /* Product meta beneath image */
+    .product-meta {
+      padding: 1.25rem 1.25rem 1.5rem;
+    }
+
+    .product-category {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.4rem;
+    }
+
+    .product-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--silver);
+    }
+
+    .product-price {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--mist);
+      margin-top: 0.4rem;
+    }
+
+    /* ─────────────────────────────────────────────────
+       FEATURED BANNER
+    ───────────────────────────────────────────────── */
+    .featured-banner {
+      margin: 0;
+      border-top: 1px solid var(--charcoal);
+      border-bottom: 1px solid var(--charcoal);
+      background: var(--ink);
+      padding: 6rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .featured-text { max-width: 500px; }
+
+    .featured-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 1.5rem;
+    }
+
+    .featured-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.08;
+      color: var(--white);
+    }
+
+    .featured-heading em { font-style: italic; color: var(--mist); }
+
+    .featured-body {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: var(--stone);
+    }
+
+    .featured-visual {
+      position: relative;
+      aspect-ratio: 4/3;
+      background: var(--charcoal);
+      overflow: hidden;
+    }
+
+    .featured-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+    }
+
+    .featured-visual::after {
+      content: 'ROSALENE\A Collection N° 04';
+      white-space: pre;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 300;
+      text-align: center;
+      color: rgba(255,255,255,0.12);
+      letter-spacing: 0.2em;
+    }
+
+    /* ─────────────────────────────────────────────────
+       CART SIDEBAR
+    ───────────────────────────────────────────────── */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 900;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+      backdrop-filter: blur(4px);
+    }
+
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: 420px; height: 100vh;
+      background: var(--ink);
+      border-left: 1px solid var(--charcoal);
+      z-index: 901;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.5s var(--ease-out);
+    }
+
+    .cart-sidebar.open { transform: translateX(0); }
+
+    .cart-header {
+      padding: 2rem;
+      border-bottom: 1px solid var(--charcoal);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .cart-close {
+      width: 36px; height: 36px;
+      border: 1px solid var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--stone);
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .cart-close:hover { border-color: var(--silver); color: var(--white); }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--charcoal);
+      animation: slideIn 0.4s var(--ease-out);
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .cart-item-img {
+      aspect-ratio: 3/4;
+      background: var(--charcoal);
+      overflow: hidden;
+    }
+
+    .cart-item-info { display: flex; flex-direction: column; justify-content: center; }
+
+    .cart-item-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--silver);
+    }
+
+    .cart-item-price {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--stone);
+      margin-top: 0.3rem;
+    }
+
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .qty-btn {
+      width: 22px; height: 22px;
+      border: 1px solid var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--stone);
+      transition: all 0.2s;
+    }
+
+    .qty-btn:hover { border-color: var(--silver); color: var(--white); }
+
+    .qty-num {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--mist);
+      min-width: 16px;
+      text-align: center;
+    }
+
+    .cart-remove {
+      align-self: start;
+      padding-top: 0.2rem;
+      font-size: 1rem;
+      color: var(--charcoal);
+      transition: color 0.3s;
+    }
+
+    .cart-remove:hover { color: var(--silver); }
+
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 1rem;
+      color: var(--stone);
+    }
+
+    .cart-empty-icon {
+      font-size: 2.5rem;
+      opacity: 0.3;
+    }
+
+    .cart-empty p {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .cart-footer {
+      padding: 2rem;
+      border-top: 1px solid var(--charcoal);
+    }
+
+    .cart-subtotal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .subtotal-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    .subtotal-amount {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--white);
+    }
+
+    .btn-checkout {
+      display: block;
+      width: 100%;
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid var(--white);
+      padding: 1.1rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-align: center;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn-checkout:hover { background: transparent; color: var(--white); }
+
+    .cart-continue {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone);
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .cart-continue:hover { color: var(--white); }
+
+    /* ─────────────────────────────────────────────────
+       CHECKOUT MODAL
+    ───────────────────────────────────────────────── */
+    .checkout-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 950;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .checkout-overlay.open { opacity: 1; pointer-events: all; }
+
+    .checkout-modal {
+      background: var(--ink);
+      border: 1px solid var(--charcoal);
+      width: 90%;
+      max-width: 680px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .checkout-overlay.open .checkout-modal { transform: none; }
+
+    .checkout-modal-header {
+      padding: 2.5rem 3rem;
+      border-bottom: 1px solid var(--charcoal);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .checkout-modal-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
+
+    .checkout-form { padding: 3rem; }
+
+    .cf-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .cf-section-title {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone);
+      border-bottom: 1px solid var(--charcoal);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .cf-row.single { grid-template-columns: 1fr; }
+
+    .cf-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .cf-label {
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    .cf-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--charcoal);
+      padding: 0.65rem 0 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .cf-input:focus { border-color: var(--silver); }
+
+    .checkout-summary {
+      background: var(--black);
+      border: 1px solid var(--charcoal);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .checkout-summary-title {
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 1rem;
+    }
+
+    .checkout-summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--mist);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--charcoal);
+    }
+
+    .checkout-summary-line:last-child { border-bottom: none; }
+
+    .checkout-summary-line.total {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-top: 0.5rem;
+    }
+
+    .btn-place-order {
+      display: block;
+      width: 100%;
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid var(--white);
+      padding: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn-place-order:hover { background: transparent; color: var(--white); }
+
+    /* ─────────────────────────────────────────────────
+       INGREDIENTS / PHILOSOPHY STRIP
+    ───────────────────────────────────────────────── */
+    .strip {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--charcoal);
+      border: 1px solid var(--charcoal);
+      margin-top: 4rem;
+    }
+
+    .pillar {
+      background: var(--black);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s;
+    }
+
+    .pillar:hover { background: var(--ink); }
+
+    .pillar-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--silver);
+      margin-top: 1rem;
+    }
+
+    .pillar-text {
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: var(--stone);
+      margin-top: 0.75rem;
+    }
+
+    /* ─────────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--charcoal);
+      background: var(--ink);
+    }
+
+    .footer-main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 3rem 3rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--white);
+    }
+
+    .footer-tagline {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--stone);
+    }
+
+    .footer-col-title {
+      font-family: var(--font-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--charcoal);
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--silver); }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 3rem;
+      border-top: 1px solid var(--charcoal);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--charcoal);
+    }
+
+    /* ─────────────────────────────────────────────────
+       TOAST
+    ───────────────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--white);
+      color: var(--black);
+      padding: 0.9rem 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s var(--ease-out);
+      z-index: 9999;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ─────────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 768px) {
+      .header-inner { padding: 0 1.5rem; }
+      #hero { padding: 0 1.5rem; }
+      .hero-sub-row { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      #products { padding: 4rem 1.5rem; }
+      .products-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-banner { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .cart-sidebar { width: 100%; max-width: 100%; }
+      .nav-left { display: none; }
+      .footer-main { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+      .cf-row { grid-template-columns: 1fr; }
+      .checkout-form { padding: 1.5rem; }
+      .checkout-modal-header { padding: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .hero-headline { font-size: clamp(3.5rem, 18vw, 5rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ANNOUNCEMENT -->
+  <div class="announcement">Complimentary shipping on orders over $120 — Use code ROSALENE15 for 15% off</div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <nav class="nav-left">
+        <a href="#products">Shop</a>
+        <a href="#featured">Collections</a>
+        <a href="#">Ritual</a>
+        <a href="#">Stores</a>
+      </nav>
+
+      <div class="brand-wordmark">ROSALENE</div>
+
+      <div class="nav-right">
+        <button class="nav-icon">Search</button>
+        <button class="nav-icon cart-btn" onclick="toggleCart()">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-texture"></div>
+    <div class="hero-content">
+      <div class="hero-super">Collection N° 04 — The Obsidian Series</div>
+      <h1 class="hero-headline">
+        Sculpted<br />
+        <span class="italic">beauty,</span><br />
+        <span class="outlined">distilled.</span>
+      </h1>
+      <div class="hero-sub-row">
+        <p class="hero-descriptor">
+          Luxury formulations born from rare botanicals and precision chemistry. Each product a ritual. Each ritual a transformation.
+        </p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop the Edit</button>
+          <button class="btn-outline">The Philosophy</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-float-label">Est. MMXVIII — Paris & New York</div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner" id="marqueeInner"></div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="products-header">
+      <div>
+        <div class="section-eyebrow">The Collection</div>
+        <h2 class="section-heading">
+          Curated<br /><em style="font-family:var(--font-display);font-size:inherit;font-weight:300">Essentials</em>
+        </h2>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="hair">Hair Care</button>
+        <button class="filter-tab" data-filter="skin">Skin</button>
+        <button class="filter-tab" data-filter="body">Body</button>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </section>
+
+  <!-- FEATURED -->
+  <div class="featured-banner" id="featured">
+    <div class="featured-text">
+      <div class="featured-eyebrow">The Ritual Collection</div>
+      <h2 class="featured-heading">
+        Science<br />meets <em>botanical</em><br />mastery.
+      </h2>
+      <p class="featured-body">
+        Developed over three years with leading cosmetic chemists in Paris, each ROSALENE formulation undergoes 240 hours of stability and efficacy testing before reaching your hands. Because beauty should always be earned.
+      </p>
+      <button class="btn-primary" style="margin-top:2rem">Discover the Science</button>
+    </div>
+    <div class="featured-visual"></div>
+  </div>
+
+  <!-- PILLARS -->
+  <div class="strip">
+    <div class="section-eyebrow">The Principles</div>
+    <h2 class="section-heading" style="margin-top:0.5rem">Our commitments.</h2>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Rare Ingredients</div>
+        <p class="pillar-text">Sourced from sustainable farms across 14 countries. Never synthesized, never compromised.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Precision Chemistry</div>
+        <p class="pillar-text">Every formula achieves clinical-grade efficacy through exacting molecular ratios.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Cruelty Free</div>
+        <p class="pillar-text">Certified by PETA and Leaping Bunny. Beauty without compromise on ethics or conscience.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">Refillable Design</div>
+        <p class="pillar-text">Every vessel is refillable, reducing waste by up to 78% versus single-use packaging.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-main">
+      <div>
+        <div class="footer-brand">ROSALENE</div>
+        <p class="footer-tagline">Luxury hair care and cosmetics crafted for those who demand the very finest. Established in Paris, 2018.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="#">Hair Care</a></li>
+          <li><a href="#">Skin</a></li>
+          <li><a href="#">Body</a></li>
+          <li><a href="#">Gift Sets</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">The Science</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="#">Shipping & Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 ROSALENE. All rights reserved.</span>
+      <span class="footer-copy">Paris · New York · London</span>
+    </div>
+  </footer>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2 class="cart-title">Your Selection</h2>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-subtotal">
+        <span class="subtotal-label">Subtotal</span>
+        <span class="subtotal-amount" id="cartSubtotal">$0.00</span>
+      </div>
+      <button class="btn-checkout" onclick="openCheckout()">Proceed to Checkout</button>
+      <span class="cart-continue" onclick="toggleCart()">Continue Shopping</span>
+    </div>
+  </aside>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="checkout-overlay" id="checkoutOverlay" onclick="closeCheckoutOutside(event)">
+    <div class="checkout-modal" id="checkoutModal">
+      <div class="checkout-modal-header">
+        <h2 class="checkout-modal-title">Checkout</h2>
+        <button class="cart-close" onclick="closeCheckout()">✕</button>
+      </div>
+      <div class="checkout-form">
+        <div class="cf-section">
+          <div class="cf-section-title">Contact Information</div>
+          <div class="cf-row">
+            <div class="cf-group">
+              <label class="cf-label">First Name</label>
+              <input class="cf-input" type="text" placeholder="Jane" />
+            </div>
+            <div class="cf-group">
+              <label class="cf-label">Last Name</label>
+              <input class="cf-input" type="text" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="cf-row single">
+            <div class="cf-group">
+              <label class="cf-label">Email Address</label>
+              <input class="cf-input" type="email" placeholder="jane@example.com" />
+            </div>
+          </div>
+        </div>
+
+        <div class="cf-section">
+          <div class="cf-section-title">Shipping Address</div>
+          <div class="cf-row single">
+            <div class="cf-group">
+              <label class="cf-label">Street Address</label>
+              <input class="cf-input" type="text" placeholder="123 Avenue Montaigne" />
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-group">
+              <label class="cf-label">City</label>
+              <input class="cf-input" type="text" placeholder="Paris" />
+            </div>
+            <div class="cf-group">
+              <label class="cf-label">Postal Code</label>
+              <input class="cf-input" type="text" placeholder="75008" />
+            </div>
+          </div>
+          <div class="cf-row single">
+            <div class="cf-group">
+              <label class="cf-label">Country</label>
+              <input class="cf-input" type="text" placeholder="France" />
+            </div>
+          </div>
+        </div>
+
+        <div class="cf-section">
+          <div class="cf-section-title">Payment</div>
+          <div class="cf-row single">
+            <div class="cf-group">
+              <label class="cf-label">Card Number</label>
+              <input class="cf-input" type="text" placeholder="•••• •••• •••• ••••" maxlength="19" id="cardNum" />
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-group">
+              <label class="cf-label">Expiry</label>
+              <input class="cf-input" type="text" placeholder="MM / YY" maxlength="7" />
+            </div>
+            <div class="cf-group">
+              <label class="cf-label">CVV</label>
+              <input class="cf-input" type="text" placeholder="•••" maxlength="4" />
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-summary" id="checkoutSummary"></div>
+
+        <button class="btn-place-order" onclick="placeOrder()">Place Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────────
+       JS
+  ───────────────────────────────────────────────── -->
+  <script>
+    /* ── Products Data ── */
+    const products = [
+      { id:1, name:'Velvet Noir Serum', category:'skin', price:148, visual:'pv-1', tag:'Best Seller' },
+      { id:2, name:'Obsidian Hair Oil',  category:'hair', price:92,  visual:'pv-2', tag:'New' },
+      { id:3, name:'Ritual Cleansing Balm', category:'skin', price:76, visual:'pv-3', tag:'' },
+      { id:4, name:'Éclat Body Crème', category:'body', price:118, visual:'pv-4', tag:'' },
+      { id:5, name:'Midnight Repair Mask', category:'hair', price:134, visual:'pv-5', tag:'New' },
+      { id:6, name:'Satin Scalp Elixir', category:'hair', price:88, visual:'pv-6', tag:'' },
+      { id:7, name:'Lumineux Eye Serum', category:'skin', price:162, visual:'pv-7', tag:'Best Seller' },
+      { id:8, name:'Obsidian Body Oil', category:'body', price:104, visual:'pv-8', tag:'' },
+    ];
+
+    let cart = [];
+    let activeFilter = 'all';
+
+    /* ── Render products ── */
+    function renderProducts(filter) {
+      const grid = document.getElementById('productGrid');
+      const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+      grid.innerHTML = filtered.map(p => `
+        <div class="product-card" data-id="${p.id}">
+          <div class="product-image-wrap">
+            <div class="product-visual ${p.visual}"></div>
+            <div class="product-overlay">
+              ${p.tag ? `<div style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--stone)">${p.tag}</div>` : ''}
+              <div class="overlay-name">${p.name}</div>
+              <div class="overlay-price">$${p.price}.00</div>
+              <button class="btn-atc" onclick="addToCart(${p.id})">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-meta">
+            <div class="product-category">${p.category === 'hair' ? 'Hair Care' : p.category === 'skin' ? 'Skin Care' : 'Body'}</div>
+            <div class="product-title">${p.name}</div>
+            <div class="product-price">$${p.price}.00</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    renderProducts('all');
+
+    /* ── Filter tabs ── */
+    document.querySelectorAll('.filter-tab').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        activeFilter = this.dataset.filter;
+        renderProducts(activeFilter);
+      });
+    });
+
+    /* ── Cart ── */
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      const existing = cart.find(c => c.id === id);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`${product.name} added to cart`);
+      bumpCount();
+    }
+
+    function updateCartUI() {
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById('cartCount').textContent = count;
+
+      const itemsEl = document.getElementById('cartItems');
+      const footerEl = document.getElementById('cartFooter');
+
+      if (cart.length === 0) {
+        itemsEl.innerHTML = `
+          <div class="cart-empty">
+            <div class="cart-empty-icon">○</div>
+            <p>Your selection is empty</p>
+          </div>`;
+        footerEl.style.display = 'none';
+      } else {
+        itemsEl.innerHTML = cart.map(item => `
+          <div class="cart-item" id="ci-${item.id}">
+            <div class="cart-item-img">
+              <div style="width:100%;height:100%" class="product-visual ${item.visual}"></div>
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">$${item.price}.00 each</div>
+              <div class="cart-item-qty">
+                <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+                <span class="qty-num">${item.qty}</span>
+                <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+              </div>
+            </div>
+            <button class="cart-remove" onclick="removeFromCart(${item.id})">✕</button>
+          </div>
+        `).join('');
+        const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        document.getElementById('cartSubtotal').textContent = `$${total.toFixed(2)}`;
+        footerEl.style.display = 'block';
+      }
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(c => c.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) removeFromCart(id);
+      else updateCartUI();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(c => c.id !== id);
+      updateCartUI();
+    }
+
+    function toggleCart() {
+      document.getElementById('cartOverlay').classList.toggle('open');
+      document.getElementById('cartSidebar').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('cartSidebar').classList.contains('open') ? 'hidden' : '';
+    }
+
+    function bumpCount() {
+      const el = document.getElementById('cartCount');
+      el.classList.remove('bump');
+      void el.offsetWidth;
+      el.classList.add('bump');
+    }
+
+    /* ── Checkout ── */
+    function openCheckout() {
+      toggleCart();
+      const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+      document.getElementById('checkoutSummary').innerHTML = `
+        <div class="checkout-summary-title">Order Summary</div>
+        ${cart.map(i => `
+          <div class="checkout-summary-line">
+            <span>${i.name} × ${i.qty}</span>
+            <span>$${(i.price * i.qty).toFixed(2)}</span>
+          </div>
+        `).join('')}
+        <div class="checkout-summary-line" style="border-bottom:1px solid var(--charcoal)">
+          <span>Shipping</span><span>Free</span>
+        </div>
+        <div class="checkout-summary-line total">
+          <span>Total</span><span>$${total.toFixed(2)}</span>
+        </div>
+      `;
+      document.getElementById('checkoutOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkoutOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeCheckoutOutside(e) {
+      if (e.target === document.getElementById('checkoutOverlay')) closeCheckout();
+    }
+
+    function placeOrder() {
+      showToast('Order placed — thank you for choosing ROSALENE');
+      cart = [];
+      updateCartUI();
+      closeCheckout();
+    }
+
+    /* ── Card number formatting ── */
+    document.getElementById('cardNum').addEventListener('input', function(e) {
+      let v = e.target.value.replace(/\D/g, '').substring(0, 16);
+      e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+    });
+
+    /* ── Toast ── */
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+    }
+
+    /* ── Marquee ── */
+    const items = ['Luxury Hair Care', '·', 'Botanical Formulations', '·', 'Paris & New York', '·', 'Sustainable Beauty', '·', 'The Obsidian Series', '·', 'Crafted with Precision', '·'];
+    const doubled = [...items, ...items, ...items, ...items];
+    document.getElementById('marqueeInner').innerHTML = doubled.map(t => `<span>${t}</span>`).join('');
+
+    /* ── Initial cart render ── */
+    updateCartUI();
+  </script>
+</body>
+</html>
